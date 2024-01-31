@@ -1,0 +1,41 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIP Code Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>ZIP Code Search</h1>
+        <form method="POST" action="/search">
+            <label for="searchTerm">Search:</label>
+            <input type="text" id="searchTerm" name="search_term" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if results %}
+            <h2>Search Results for "{{ search_term }}":</h2>
+            <ul>
+                {% for result in results %}
+                    {% if 'error' in result %}
+                        <p class="error">{{ result['error'] }}</p>
+                    {% else %}
+                        <li>
+                            <strong>ZIP Code:</strong> {{ result['zip_code'] }}<br>
+                            <strong>City:</strong> {{ result['city'] }}<br>
+                            <strong>Province:</strong> {{ result['province'] }}<br>
+                            <strong>Region:</strong> {{ result['region'] }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
