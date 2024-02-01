@@ -38,3 +38,10 @@ function displayResult(data) {
         }
     }
 }
+
+function changeEntriesPerPage() {
+const selectedValue = document.getElementById("entriesPerPage").value;
+// Implement logic to update the display based on selected entries per page
+// You may use AJAX to fetch and display the appropriate subset of results
+console.log("Selected entries per page:", selectedValue);
+}

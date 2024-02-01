@@ -20,6 +20,17 @@
 
         {% if result %}
             <h2>Search Results for "{{ search_term }}":</h2>
+
+            <!-- Dropdown for number of entries -->
+            <label for="entriesPerPage">Entries per page:</label>
+            <select id="entriesPerPage" onchange="changeEntriesPerPage()">
+                <option value="10">10</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+
+            <!-- Pagination -->
             <ul>
                 {% for region, provinces in result.items() %}
                     <li>
