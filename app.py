@@ -1,20 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, abort
 from flask_restful import Resource, Api
 import os
 
 app = Flask(__name__)
 api = Api(app)
 
-def read_data_from_file(file_path):
-    """
-    The function reads data from a file and organizes it into a nested dictionary structure.
 
-    :param file_path: The file path is the location of the file that you want to read the data from. It
-    should be a string that specifies the path to the file, including the file name and extension. For
-    example, "data.txt" or "C:/Users/username/data.txt"
-    :return: a nested dictionary containing the data read from the file. The structure of the dictionary
-    is as follows:
-    """
+def read_data_from_file(file_path):
     data = {}
 
     with open(file_path, 'r') as file:
@@ -31,17 +23,6 @@ def read_data_from_file(file_path):
 
 
 def search_data(user_input, data):
-    """
-    The `search_data` function takes a user input and a data dictionary, and returns a dictionary of
-    matching regions, provinces, cities, and zip codes based on exact or partial matches.
-
-    :param user_input: The user_input parameter is the input provided by the user, which can be a
-    region, province, zip code, or city/municipality
-    :param data: The `data` parameter is a dictionary that contains information about regions,
-    provinces, cities, and zip codes. The structure of the `data` dictionary is as follows:
-    :return: The function `search_data` returns a dictionary `result` containing the search results. The
-    structure of the dictionary is as follows:
-    """
     result = {}
 
     # Exact match for region
@@ -99,6 +80,7 @@ def search_data(user_input, data):
 
     return result
 
+
 file_path = os.path.join('data/postal_regions.txt')
 data = read_data_from_file(file_path)
 
@@ -110,27 +92,23 @@ def index():
 
 @app.route('/search', methods=['POST'])
 def search_zip_code():
-    user_input = request.form.get('search_zip')
-    if not user_input:
-        abort(400, "Please provide a valid search input.")
-
+    user_input = request.form.get('search_term')
     result = search_data(user_input, data)
-    return render_template('index.html', result=result, search_zip=user_input)
+    return render_template('index.html', result=result, search_term=user_input)
 
-class ZipCodeSearch(Resource):
+
+class APIResource(Resource):
     def get(self):
-        try:
-            user_input = request.args.get('search_zip', '')
-            if not user_input:
-                abort(400, "Please provide a valid search input.")
+        user_input = request.args.get('search_term')
 
-            result = search_data(user_input, data)
-            return {'result': result, 'search_zip': user_input}
-        except Exception as e:
-            logging.error(f"Error processing search request: {str(e)}")
-            return {'error': 'Internal Server Error'}, 500
+        if not user_input:
+            abort(400, description="Missing 'search_term' parameter in the request.")
 
-api.add_resource(ZipCodeSearch, '/search')
+        result = search_data(user_input, data)
+        return jsonify({'result': result, 'search_term': user_input})
+
+
+api.add_resource(APIResource, '/search')
 
 if __name__ == '__main__':
     app.run(debug=True)
