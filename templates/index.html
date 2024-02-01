@@ -18,20 +18,20 @@
             <button type="submit">Search</button>
         </form>
 
-        {% if results %}
+        {% if result %}
             <h2>Search Results for "{{ search_term }}":</h2>
             <ul>
-                {% for result in results %}
-                    {% if 'error' in result %}
-                        <p class="error">{{ result['error'] }}</p>
-                    {% else %}
-                        <li>
-                            <strong>ZIP Code:</strong> {{ result['zip_code'] }}<br>
-                            <strong>City:</strong> {{ result['city'] }}<br>
-                            <strong>Province:</strong> {{ result['province'] }}<br>
-                            <strong>Region:</strong> {{ result['region'] }}
-                        </li>
-                    {% endif %}
+                {% for region, provinces in result.items() %}
+                    <li>
+                        <strong>Region:</strong> {{ region }}<br>
+                        {% for province, cities in provinces.items() %}
+                            <strong>Province:</strong> {{ province }}<br>
+                            {% for city, zip_code in cities.items() %}
+                                <strong>City:</strong> {{ city }}<br>
+                                <strong>ZIP Code:</strong> {{ zip_code }}<br>
+                            {% endfor %}
+                        {% endfor %}
+                    </li>
                 {% endfor %}
             </ul>
         {% endif %}
