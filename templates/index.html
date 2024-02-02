@@ -1,52 +1,158 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZIP Code Search</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>ZIP Code Search</h1>
-        <form method="POST" action="/search">
-            <label for="searchTerm">Search:</label>
-            <input type="text" id="searchTerm" name="search_term" required>
-            <button type="submit">Search</button>
-        </form>
+  <head>
+    <title>Limp Coordinated Alligator</title>
+    <meta property="og:title" content="Limp Coordinated Alligator" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
 
-        {% if result %}
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  </head>
+  <body>
+    <div>
+      <div class="home-container">
+        <header data-role="Header" class="home-header">
+          <div class="home-container1">
+            <svg viewBox="0 0 1024 1024" class="home-icon">
+              <path
+                d="M292.571 0c9.714 0 18.286 8.571 18.286 18.286v841.143c0 6.857-4 13.143-9.714 16l-274.286 146.286c-2.857 1.714-5.714 2.286-8.571 2.286-9.714 0-18.286-8.571-18.286-18.286v-841.143c0-6.857 4-13.143 9.714-16l274.286-146.286c2.857-1.714 5.714-2.286 8.571-2.286zM1005.714 0c9.714 0 18.286 8.571 18.286 18.286v841.143c0 6.857-4 13.143-9.714 16l-274.286 146.286c-2.857 1.714-5.714 2.286-8.571 2.286-9.714 0-18.286-8.571-18.286-18.286v-841.143c0-6.857 4-13.143 9.714-16l274.286-146.286c2.857-1.714 5.714-2.286 8.571-2.286zM365.714 0c2.857 0 5.714 0.571 8 1.714l292.571 146.286c6.286 3.429 10.286 9.714 10.286 16.571v841.143c0 9.714-8.571 18.286-18.286 18.286-2.857 0-5.714-0.571-8-1.714l-292.571-146.286c-6.286-3.429-10.286-9.714-10.286-16.571v-841.143c0-9.714 8.571-18.286 18.286-18.286z"
+              ></path>
+            </svg>
+            <h2 class="home-text">
+              <span>ZIPKODE.PH</span>
+            </h2>
+          </div>
+          <div class="home-btn-group">
+            <button
+              href="https://colorhunt.co/palettes/navy"
+              target="_blank"
+              rel="noreferrer noopener"
+              class="home-link button"
+            >
+              Donate
+            </button>
+          </div>
+        </header>
+        <div class="home-container2">
+          <div class="home-container3">
+            <form method="POST" action="/search">
+            <input
+              type="text"
+              placeholder="Region, Province, City..."
+              class="home-textinput input"
+              id="searchTerm"
+              name="search_term"
+              required
+            />
+            <button
+              class="home-link1 button"
+              type="submit">
+              Search
+            </button>
+            </form>
+          </div>
+        </div>
+        <div id="Data Container" class="home-container4">
+          {% if result %}
             <h2>Search Results for "{{ search_term }}":</h2>
 
-            <!-- Dropdown for number of entries -->
-            <label for="entriesPerPage">Entries per page:</label>
-            <select id="entriesPerPage" onchange="changeEntriesPerPage()">
-                <option value="10">10</option>
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-
-            <!-- Pagination -->
-            <ul>
-                {% for region, provinces in result.items() %}
-                    <li>
-                        <strong>Region:</strong> {{ region }}<br>
+            <!-- DataTables Table -->
+            <table id="zipTable" class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th>Region</th>
+                        <th>Province</th>
+                        <th>City</th>
+                        <th>ZIP Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for region, provinces in result.items() %}
                         {% for province, cities in provinces.items() %}
-                            <strong>Province:</strong> {{ province }}<br>
                             {% for city, zip_code in cities.items() %}
-                                <strong>City:</strong> {{ city }}<br>
-                                <strong>ZIP Code:</strong> {{ zip_code }}<br>
+                                <tr>
+                                    <td>{{ region }}</td>
+                                    <td>{{ province }}</td>
+                                    <td>{{ city }}</td>
+                                    <td>{{ zip_code }}</td>
+                                </tr>
                             {% endfor %}
                         {% endfor %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+          {% endif %}
+        </div>
+        <footer class="home-footer">
+          <span class="home-text4">
+            © 2024 Kent Edoloverio, All Rights Reserved.
+          </span>
+        </footer>
+      </div>
     </div>
+    <script defer="" src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Your existing script.js -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
+
+    <!-- Initialize DataTables -->
+    <script>
+        $(document).ready(function() {
+            $('#zipTable').DataTable({
+                paging: true, // Enable pagination
+                lengthMenu: [10, 30, 50, 100], // Set the number of entries per page
+                searching: false // Disable search feature
+            });
+        });
+    </script>
+  </body>
 </html>
