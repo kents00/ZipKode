@@ -87,7 +87,8 @@ data = read_data_from_file(file_path)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    all_data = data
+    return render_template('index.html', result=all_data, search_term=None)
 
 
 @app.route('/search', methods=['POST'])

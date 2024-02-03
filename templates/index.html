@@ -75,6 +75,7 @@
           </div>
         </header>
         <div class="home-container2">
+
           <div class="home-container3">
             <form method="POST" action="/search">
             <input
@@ -95,10 +96,7 @@
         </div>
         <div id="Data Container" class="home-container4">
           {% if result %}
-            <h2>Search Results for "{{ search_term }}":</h2>
-
-            <!-- DataTables Table -->
-            <table id="zipTable" class="table table-bordered ">
+            <table id="zipTable" class="table table-border">
                 <thead>
                     <tr>
                         <th>Region</th>
@@ -122,7 +120,22 @@
                     {% endfor %}
                 </tbody>
             </table>
-          {% endif %}
+          {% elif not result %}
+          <h3>No data available</h3>
+          {% else %}
+            {% for region, provinces in result.items() %}
+                {% for province, cities in provinces.items() %}
+                    {% for city, zip_code in cities.items() %}
+                        <tr>
+                            <td>{{ region }}</td>
+                            <td>{{ province }}</td>
+                            <td>{{ city }}</td>
+                            <td>{{ zip_code }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
         </div>
         <footer class="home-footer">
           <span class="home-text4">
