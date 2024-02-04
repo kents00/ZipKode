@@ -91,6 +91,10 @@ def index():
     return render_template('index.html', result=all_data, search_term=None)
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
 @app.route('/search', methods=['POST'])
 def search_zip_code():
     user_input = request.form.get('search_term')

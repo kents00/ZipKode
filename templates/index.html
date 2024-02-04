@@ -15,16 +15,18 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
+
     <header class="container-header bg-dark text-light ">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="col-md-6">
                 <h3 class="mb-0 font-weight-bold">ZIPKODE</h3>
             </div>
             <div class="col-md-6 text-right">
-                <button class="btn btn-light font-weight-bold"
+                <a class="btn btn-light font-weight-bold"
                         href="https://ko-fi.com/kents_workof_art"
-                        target="_blank">DONATE
-                </button>
+                        target="_blank"
+                        rel="noreferrer noopener">DONATE
+                </a>
             </div>
         </div>
     </header>
@@ -60,7 +62,7 @@
                 </table>
             </div>
         {% elif not result %}
-          <h3>No data available</h3>
+          <h3 style="text-align: center;">The data you are looking for does not exist.</h3>
         {% else %}
             {% for region, provinces in result.items() %}
                 {% for province, cities in provinces.items() %}
@@ -79,8 +81,7 @@
     <footer class="bg-dark text-light py-3 text-center">
         <div class="container">
             <p class="mb-0">© 2024 Kent Edoloverio, All Rights Reserved.</p>
-            <a href="/documentation" class="text-light mr-3">Documentation</a>
-            <a href="/contribute" class="text-light mr-3">Contribute</a>
+            <a href="https://github.com/kents00/ZipKode/blob/main/README.md" class="text-light mr-3">Documentation</a>
         </div>
     </footer>
 

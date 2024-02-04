@@ -21,7 +21,7 @@ footer {
 vertical-align: middle;
 }
 .banner-container {
-  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -29,6 +29,16 @@ vertical-align: middle;
   width: 100%;
   height: auto;
   display: block;
+}
+
+.text-light-highlighted {
+  color: rgb(255, 255, 255);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.text-light-highlighted:hover {
+  background-color: #0056b3;
 }
 
 @media (max-width: 1440px) {
