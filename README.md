@@ -43,9 +43,11 @@ curl https://zipkode.onrender.com/search?search_term=Manila
 ```json
 {
   "result": {
-    "NCR": {
+    "NCR (National Capital Region)": {
       "Metro Manila": {
-        "Manila": "1000"
+        "Manila Bay (Reclamation)": "1308",
+        "Manila Doctors Village": "1748",
+        "Manila Memorial Park": "1717"
       }
     }
   },
