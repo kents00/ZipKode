@@ -31,7 +31,11 @@ The project provides a simple API for searching ZIP codes.
 **Example Request**:
 
 ```bash
+// localhost
 curl http://127.0.0.1:5000/search?search_term=Manila
+
+// render
+curl https://zipkode.onrender.com/search?search_term=Manila
 ```
 
 **Example Response**:
