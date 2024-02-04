@@ -5,7 +5,6 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-
 def read_data_from_file(file_path):
     data = {}
 
@@ -84,12 +83,14 @@ def search_data(user_input, data):
 file_path = os.path.join('data/postal_regions.txt')
 data = read_data_from_file(file_path)
 
-
 @app.route('/')
 def index():
     all_data = data
     return render_template('index.html', result=all_data, search_term=None)
 
+@app.route("/robots.txt")
+def robots_dot_txt():
+    return "User-agent: *\nAllow: /"
 
 @app.errorhandler(404)
 def page_not_found(error):
