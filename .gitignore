@@ -1,5 +1,6 @@
 env
 api.py
+migrate.py
 sample.py
 __pycache__
 Old templates

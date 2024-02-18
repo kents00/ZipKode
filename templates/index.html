@@ -53,17 +53,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for region, provinces in result.items() %}
-                            {% for province, cities in provinces.items() %}
-                                {% for city, zip_code in cities.items() %}
-                                    <tr>
-                                        <td class="font-weight-normal normal">{{ region }}</td>
-                                        <td class="font-weight-normal normal">{{ province }}</td>
-                                        <td class="font-weight-normal normal">{{ city }}</td>
-                                        <td class="font-weight-normal normal">{{ zip_code }}</td>
-                                    </tr>
-                                {% endfor %}
-                            {% endfor %}
+                        {% for row in result %}
+                            <tr>
+                                <td class="font-weight-normal small">{{ row[0] }}</td>
+                                <td class="font-weight-normal small">{{ row[1] }}</td>
+                                <td class="font-weight-normal small">{{ row[2] }}</td>
+                                <td class="font-weight-normal small">{{ row[3] }}</td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -71,18 +67,14 @@
         {% elif not result %}
           <h3 style="text-align: center;">The data you are looking for does not exist.</h3>
         {% else %}
-            {% for region, provinces in result.items() %}
-                {% for province, cities in provinces.items() %}
-                    {% for city, zip_code in cities.items() %}
-                        <tr>
-                            <td class="font-weight-normal small">{{ region }}</td>
-                            <td class="font-weight-normal small">{{ province }}</td>
-                            <td class="font-weight-normal small">{{ city }}</td>
-                            <td class="font-weight-normal small">{{ zip_code }}</td>
-                        </tr>
-                    {% endfor %}
+                {% for row in result %}
+                    <tr>
+                        <td class="font-weight-normal small">{{ row[0] }}</td>
+                        <td class="font-weight-normal small">{{ row[1] }}</td>
+                        <td class="font-weight-normal small">{{ row[2] }}</td>
+                        <td class="font-weight-normal small">{{ row[3] }}</td>
+                    </tr>
                 {% endfor %}
-            {% endfor %}
         {% endif %}
     </div>
     <footer class="bg-dark text-light py-3 text-center">
