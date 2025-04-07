@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>ZIPKODE</title>
     <meta charset="UTF-8">
@@ -7,9 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta property="og:title" content="ZIPKODE" />
-    <meta
-      name="description"
-      content="It's a web app using the Flask framework that lets users search for ZIP codes by regions, provinces, cities, and municipalities in a specific area in the philippines.">
+    <meta name="description"
+        content="It's a web app using the Flask framework that lets users search for ZIP codes by regions, provinces, cities, and municipalities in a specific area in the philippines.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="twitter:card" content="summary_large_image" />
 
@@ -20,61 +20,62 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
+
 <body>
 
-    <header class="container-header bg-dark text-light ">
+    <header class="container-header bg-dark text-light animate__animated animate__fadeIn">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="col-md-6">
                 <h3 class="mb-0 font-weight-bold">ZIPKODE</h3>
             </div>
             <div class="col-md-6 text-right">
-                <a class="btn btn-light font-weight-bold"
-                        href="https://ko-fi.com/kents_workof_art"
-                        target="_blank"
-                        rel="noreferrer noopener">DONATE
+                <a class="btn btn-light font-weight-bold" href="https://ko-fi.com/kents_workof_art" target="_blank"
+                    rel="noreferrer noopener">DONATE
                 </a>
             </div>
         </div>
     </header>
-     <div class="banner-container">
+    <div class="banner-container animate__animated animate__slideInDown">
         <img src="{{ url_for('static', filename='streetmap.png') }}" alt="Your Image" class="img-fluid">
     </div>
-    <div class="container mt-4">
+    <div class="container mt-4 animate__animated animate__fadeIn">
         {% if result %}
-            <div class="table-responsive">
-                <table id="zipTable" class="table table-sm table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th class="font-weight-bold small">REGION</th>
-                            <th class="font-weight-bold small">PROVINCE</th>
-                            <th class="font-weight-bold small">CITY/MUNICIPALITY</th>
-                            <th class="font-weight-bold small">ZIP CODE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in result %}
-                            <tr>
-                                <td class="font-weight-normal small">{{ row[0] }}</td>
-                                <td class="font-weight-normal small">{{ row[1] }}</td>
-                                <td class="font-weight-normal small">{{ row[2] }}</td>
-                                <td class="font-weight-normal small">{{ row[3] }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% elif not result %}
-          <h3 style="text-align: center;">The data you are looking for does not exist.</h3>
-        {% else %}
-                {% for row in result %}
+        <div class="table-responsive">
+            <table id="zipTable" class="table table-sm table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="font-weight-bold small">REGION</th>
+                        <th class="font-weight-bold small">PROVINCE</th>
+                        <th class="font-weight-bold small">CITY/MUNICIPALITY</th>
+                        <th class="font-weight-bold small">ZIP CODE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in result %}
                     <tr>
                         <td class="font-weight-normal small">{{ row[0] }}</td>
                         <td class="font-weight-normal small">{{ row[1] }}</td>
                         <td class="font-weight-normal small">{{ row[2] }}</td>
                         <td class="font-weight-normal small">{{ row[3] }}</td>
                     </tr>
-                {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% elif not result %}
+        <h3 style="text-align: center;">The data you are looking for does not exist.</h3>
+        {% else %}
+        {% for row in result %}
+        <tr>
+            <td class="font-weight-normal small">{{ row[0] }}</td>
+            <td class="font-weight-normal small">{{ row[1] }}</td>
+            <td class="font-weight-normal small">{{ row[2] }}</td>
+            <td class="font-weight-normal small">{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
         {% endif %}
     </div>
     <footer class="bg-dark text-light py-3 text-center">
@@ -89,9 +90,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
+
 </html>
