@@ -41,6 +41,60 @@ vertical-align: middle;
   background-color: #0056b3;
 }
 
+/* Animation durations */
+.animate__animated {
+    animation-duration: 1s;
+}
+
+/* Table row hover effect */
+.highlight-row {
+    background-color: #f5f5f5 !important;
+    transition: background-color 0.3s ease;
+}
+
+/* DataTable customization */
+.dataTables_wrapper {
+    padding: 20px 0;
+}
+
+.dataTables_filter input {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+.dataTables_length select {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+/* Button hover effects */
+.btn {
+    transition: transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Table animation */
+.table-responsive {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 1440px) {
   #zipTable thead th.font-weight-bold.small {
     font-size: 16px;
